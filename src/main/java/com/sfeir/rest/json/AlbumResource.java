@@ -9,7 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 // The html page to list and add fruits is located here : http://localhost:8081/albums.html
-@Path("/albums")
+@Path("/albumsloc")
 public class AlbumResource {
 
     private Set<Album> albums = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
