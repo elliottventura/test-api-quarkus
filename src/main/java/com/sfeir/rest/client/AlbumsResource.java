@@ -6,6 +6,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.util.Set;
 
@@ -25,6 +26,13 @@ public class AlbumsResource {
     @GET
     @Path("")
     public Set<Album> getAll() {
+        return albumsService.getAll();
+    }
+
+    @POST
+    @Path("")
+    public Set<Album> addAlbum(Album album) {
+        albumsService.addAlbum(album);
         return albumsService.getAll();
     }
 }

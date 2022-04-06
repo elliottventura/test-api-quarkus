@@ -50,4 +50,4 @@ If you want to learn more about building native executables, please consult http
 ## Related Guides
 
 - RESTEasy JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
-- + Client : https://quarkus.io/guides/rest-client
+- + Client : https://quarkus.io/guides/rest-client & http://www.mastertheboss.com/soa-cloud/quarkus/how-to-code-a-quarkus-rest-client/
