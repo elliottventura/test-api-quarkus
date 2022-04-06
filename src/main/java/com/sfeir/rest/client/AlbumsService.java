@@ -20,5 +20,5 @@ public interface AlbumsService {
 
     @POST
     @Path("")
-    Set<Album> addAlbum(Album album);
+    Album addAlbum(Album album);
 }
