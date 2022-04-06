@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Album REST service</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.8/wing.min.css" />
+  <!-- Load AngularJS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module("AlbumManagement", []);
+
+    //Controller Part
+    app.controller("AlbumManagementController", function ($scope, $http) {
+
+      //Initialize page with default data which is blank in this example
+      $scope.fruits = [];
+
+      $scope.form = {
+        title: "",
+        artiste: "",
+        price: 0.0
+      };
+
+      //Now load the data from server
+      _refreshPageData();
+
+      //HTTP POST methods for add albums
+      $scope.add = function () {
+        var data = { "id": $scope.form.id, "title": $scope.form.title, "artiste": $scope.form.artiste, "price": $scope.form.price };
+
+        $http({
+          method: "POST",
+          url: '/albums',
+          data: angular.toJson(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(_success, _error);
+      };
+
+      /* Private Methods */
+      //HTTP GET- get all albums collection
+      function _refreshPageData() {
+        $http({
+          method: 'GET',
+          url: '/albums'
+        }).then(function successCallback(response) {
+          $scope.albums = response.data;
+        }, function errorCallback(response) {
+          console.log(response.statusText);
+        });
+      }
+
+      function _success(response) {
+        _refreshPageData();
+        _clearForm();
+      }
+
+      function _error(response) {
+        alert(response.data.message || response.statusText);
+      }
+
+      //Clear the form
+      function _clearForm() {
+        $scope.form.name = "";
+        $scope.form.description = "";
+      }
+    });
+  </script>
+</head>
+
+<body ng-app="AlbumManagement" ng-controller="AlbumManagementController">
+
+  <div class="container">
+    <h1>REST Service - Album</h1>
+
+    <h3>Add an album</h3>
+    <form ng-submit="add()">
+      <div class="row">
+        <div class="col-6"><input type="text" placeholder="Title" ng-model="form.title" size="60" /></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><input type="text" placeholder="Artiste" ng-model="form.artiste" size="60" /></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><input type="text" placeholder="Price" ng-model="form.price" size="60" /></div>
+      </div>
+      <input type="submit" value="Save" />
+    </form>
+
+    <h3>Album List</h3>
+    <div class="row">
+      <div class="col-2">Id</div>
+      <div class="col-2">Title</div>      
+      <div class="col-2">Artiste</div>
+      <div class="col-2">Price</div>
+    </div>
+    <div class="row" ng-repeat="album in albums">
+      <div class="col-2">{{ album.id }}</div>
+      <div class="col-2">{{ album.title }}</div>
+      <div class="col-2">{{ album.artiste }}</div>
+      <div class="col-2">{{ album.price }}</div>
+    </div>
+  </div>
+
+</body>
+
+</html>
