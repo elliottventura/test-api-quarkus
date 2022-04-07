@@ -2,9 +2,9 @@ package com.sfeir.rest.client;
 
 
 public class Album {
-    public String id;
+    public int id;
     public String title;
-    public String artiste;
+    public String artist;
     public float price;
     // Major major;
 

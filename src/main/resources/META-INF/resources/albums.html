@@ -18,7 +18,7 @@
 
       $scope.form = {
         title: "",
-        artiste: "",
+        artist: "",
         price: 0.0
       };
 
@@ -27,7 +27,7 @@
 
       //HTTP POST methods for add albums
       $scope.add = function () {
-        var data = { "id": $scope.form.id, "title": $scope.form.title, "artiste": $scope.form.artiste, "price": $scope.form.price };
+        var data = { "id": $scope.form.id, "title": $scope.form.title, "artist": $scope.form.artist, "price": $scope.form.price };
 
         $http({
           method: "POST",
@@ -81,7 +81,7 @@
         <div class="col-6"><input type="text" placeholder="Title" ng-model="form.title" size="60" /></div>
       </div>
       <div class="row">
-        <div class="col-6"><input type="text" placeholder="Artiste" ng-model="form.artiste" size="60" /></div>
+        <div class="col-6"><input type="text" placeholder="artist" ng-model="form.artist" size="60" /></div>
       </div>
       <div class="row">
         <div class="col-6"><input type="text" placeholder="Price" ng-model="form.price" size="60" /></div>
@@ -93,13 +93,13 @@
     <div class="row">
       <div class="col-2">Id</div>
       <div class="col-2">Title</div>      
-      <div class="col-2">Artiste</div>
+      <div class="col-2">artist</div>
       <div class="col-2">Price</div>
     </div>
     <div class="row" ng-repeat="album in albums">
       <div class="col-2">{{ album.id }}</div>
       <div class="col-2">{{ album.title }}</div>
-      <div class="col-2">{{ album.artiste }}</div>
+      <div class="col-2">{{ album.artist }}</div>
       <div class="col-2">{{ album.price }}</div>
     </div>
   </div>
