@@ -51,3 +51,9 @@ If you want to learn more about building native executables, please consult http
 
 - RESTEasy JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
 - + Client : https://quarkus.io/guides/rest-client & http://www.mastertheboss.com/soa-cloud/quarkus/how-to-code-a-quarkus-rest-client/
+
+# To dockerize
+
+- mvn package
+- docker build -f .\src\main\docker\Dockerfile.jvm -t test-api-quarkus:v1 .
+- docker run -i --rm -p 3081:8081 test-api-quarkus:v1
