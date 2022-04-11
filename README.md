@@ -52,8 +52,33 @@ If you want to learn more about building native executables, please consult http
 - RESTEasy JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
 - + Client : https://quarkus.io/guides/rest-client & http://www.mastertheboss.com/soa-cloud/quarkus/how-to-code-a-quarkus-rest-client/
 
+# UI
+
+URL of ui (when dockerized) : http://localhost:3081/albums.html
+
 # To dockerize
 
 - mvn package
 - docker build -f .\src\main\docker\Dockerfile.jvm -t test-api-quarkus:v1 .
 - docker run -i --rm -p 3081:8081 test-api-quarkus:v1
+
+# To allow communication beetween containers : 
+
+## Solution 1 (bad solution)
+Find the internal ip of the container to access : docker inspect <container_id> | grep IPAddress
+Use this ip instead of localhost in the url. The port is the port of the api (and not the container exposed port)
+Here we use the bridge. Each container has its ip and we use the ip to communicate.
+
+## Solution 2
+Create your own network in which your applications will run.
+
+- docker network create test-api-net
+- docker run -i --rm --net test-api-net -p 3082:8082 --name test-api-springboot test-api-springboot:v1
+
+- Use docker network rm test-api-net to delete the network
+
+
+# Summary
+mvn package
+docker build -f .\src\main\docker\Dockerfile.jvm -t test-api-quarkus:v1 .
+docker run -i --rm --net test-api-net -p 3081:8081 --name test-api-quarkus test-api-quarkus:v1
